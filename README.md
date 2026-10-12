@@ -14,45 +14,45 @@ This project covers the entire Data Science Lifecycle:
 ---
 
 ## 📊 1. Data Exploration & Analysis (EDA)
-* **Dataset Source:** Public financial transaction dataset from Kaggle (`amanalisiddiqui/fraud-detection-dataset`)[cite: 1].
-* **Data Scale:** Consists of **6,362,620 rows** of transactions and **11 feature columns**[cite: 1, 3].
+* **Dataset Source:** Public financial transaction dataset from Kaggle (`amanalisiddiqui/fraud-detection-dataset`).
+* **Data Scale:** Consists of **6,362,620 rows** of transactions and **11 feature columns**.
 * **Key Insights:**
-  * **Class Imbalance:** Extreme class imbalance is observed. Normal transactions (`0`) account for ~6.35 million, while fraudulent transactions (`1`) total only 8,213 rows[cite: 3]. The overall fraud rate is extremely low at **0.13%**[cite: 3].
-  * **Transaction Types:** Based on analysis, the most frequent transaction types are `CASH_OUT` and `PAYMENT`[cite: 1, 3]. However, the highest fraud risk is strictly concentrated in **`TRANSFER` (~0.77%)** and **`CASH_OUT` (~0.18%)**[cite: 1, 5].
+  * **Class Imbalance:** Extreme class imbalance is observed. Normal transactions (`0`) account for ~6.35 million, while fraudulent transactions (`1`) total only 8,213 rows. The overall fraud rate is extremely low at **0.13%**.
+  * **Transaction Types:** Based on analysis, the most frequent transaction types are `CASH_OUT` and `PAYMENT`. However, the highest fraud risk is strictly concentrated in **`TRANSFER` (~0.77%)** and **`CASH_OUT` (~0.18%)**.
 
 ---
 
 ## ⚙️ 2. Feature Engineering & Preprocessing
-* **Derived Features:** Created balance difference features before and after transactions for both senders (`balanceDiffOrig`) and receivers (`balanceDiffDest`) to detect balance-draining anomalies[cite: 6, 7].
-* **Data Transformation:** Applied logarithmic transformation (`np.log1p`) to mitigate extreme skewness in transaction amounts, alongside feature scaling using `StandardScaler` and `OneHotEncoder`[cite: 6, 11, 12].
-* **Pipeline Integration:** Combined all preprocessing steps into a Scikit-Learn Pipeline to ensure consistent data processing[cite: 12].
+* **Derived Features:** Created balance difference features before and after transactions for both senders (`balanceDiffOrig`) and receivers (`balanceDiffDest`) to detect balance-draining anomalies.
+* **Data Transformation:** Applied logarithmic transformation (`np.log1p`) to mitigate extreme skewness in transaction amounts, alongside feature scaling using `StandardScaler` and `OneHotEncoder`.
+* **Pipeline Integration:** Combined all preprocessing steps into a Scikit-Learn Pipeline to ensure consistent data processing.
 
 ---
 
 ## 🤖 3. Machine Learning Modeling
-* **Algorithm:** Logistic Regression with the `class_weight='balanced'` parameter to assign specialized weights to the minority class (fraud)[cite: 12].
-* **Train-Test Split:** Split the data with a **70:30** ratio utilizing the `stratify=y` parameter to maintain proportional representation of the fraud class[cite: 11].
+* **Algorithm:** Logistic Regression with the `class_weight='balanced'` parameter to assign specialized weights to the minority class (fraud).
+* **Train-Test Split:** Split the data with a **70:30** ratio utilizing the `stratify=y` parameter to maintain proportional representation of the fraud class.
 * **Model Evaluation Metrics:**
-  * **Overall Accuracy:** Reached **94.77%** on the test set[cite: 12].
-  * **Recall (Fraud Class):** Reached **94%**, ensuring that the system successfully captures the vast majority of fraudulent cases and minimizes escaped perpetrators[cite: 12].
-* **Model Persistence:** The trained model pipeline was exported using the `joblib` library and saved as `fraud_detection_pipeline.pkl`[cite: 12].
+  * **Overall Accuracy:** Reached **94.77%** on the test set.
+  * **Recall (Fraud Class):** Reached **94%**, ensuring that the system successfully captures the vast majority of fraudulent cases and minimizes escaped perpetrators.
+* **Model Persistence:** The trained model pipeline was exported using the `joblib` library and saved as `fraud_detection_pipeline.pkl`.
 
 ---
 
 ## 💻 4. Application Deployment & Preview
 The machine learning model has been integrated into an interactive web application interface (Fraud Detection App) where users can dynamically test transaction parameters:
-* **Normal Transaction:** Returns the status *“No Fraud Detected”* (Prediction 0)[cite: 15].
-* **Suspicious/Fraud Transaction:** Returns a warning alert *“Fraud Detected!”* (Prediction 1)[cite: 14].
+* **Normal Transaction:** Returns the status *“No Fraud Detected”* (Prediction 0).
+* **Suspicious/Fraud Transaction:** Returns a warning alert *“Fraud Detected!”* (Prediction 1).
 
 ---
 
 ## 🛠️ Tech Stack & Tools
-* **Programming Language:** Python[cite: 1]
-* **Data Analysis:** Pandas, NumPy[cite: 1]
-* **Data Visualization:** Matplotlib, Seaborn[cite: 1]
-* **Machine Learning:** Scikit-Learn[cite: 1, 11, 12]
-* **Model Saving:** Joblib[cite: 12]
-* **Environment:** Google Colab[cite: 1]
+* **Programming Language:** Python
+* **Data Analysis:** Pandas, NumPy
+* **Data Visualization:** Matplotlib, Seaborn
+* **Machine Learning:** Scikit-Learn
+* **Model Saving:** Joblib
+* **Environment:** Google Colab
 
 ---
 
