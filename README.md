@@ -1,50 +1,48 @@
-# End-to-End-Financial-Fraud-Detection-System-Machine-Learning-and-Data-Analytics
-End-to-end Machine Learning &amp; Data Analytics project for financial transaction security. Built with Python, Scikit-Learn (Logistic Regression), and deployed as an interactive web app to detect fraudulent activities accurately.
 # 🚀 End-to-End Financial Fraud Detection System
 *Machine Learning & Data Analytics Project for Transaction Security*
 
 ## 📌 Project Overview
-Kejahatan finansial seperti penipuan transaksi (*fraud*) merupakan salah satu ancaman terbesar dalam dunia perbankan digital. Proyek ini dirancang untuk membangun sistem deteksi penipuan otomatis berbasis *Machine Learning* yang mampu mengenali pola transaksi mencurigakan secara akurat. 
+Financial crime, such as transaction fraud, is one of the largest threats in digital banking. This project is designed to build an automated fraud detection system using Machine Learning capable of accurately identifying suspicious transaction patterns.
 
-Proyek ini mencakup seluruh siklus hidup data (*Data Science Lifecycle*):
-1. Pengunduhan dataset skala besar secara otomatis.
-2. Eksplorasi Data Mendalam (*Exploratory Data Analysis - EDA*).
-3. Rekayasa Fitur (*Feature Engineering*).
-4. Pemodelan Machine Learning (*Logistic Regression* dengan penanganan *imbalanced data*).
-5. Evaluasi Performa Model & *Deployment* ke Aplikasi Web Interaktif.
+This project covers the entire Data Science Lifecycle:
+1. Automated large-scale dataset downloading.
+2. In-depth Exploratory Data Analysis (EDA).
+3. Feature Engineering.
+4. Machine Learning modeling (Logistic Regression with imbalanced data handling).
+5. Model performance evaluation and deployment into an interactive web application.
 
 ---
 
 ## 📊 1. Data Exploration & Analysis (EDA)
-* **Dataset Source:** Dataset transaksi finansial publik dari Kaggle (`amanalisiddiqui/fraud-detection-dataset`)[cite: 1].
-* **Ukuran Data:** Terdiri dari **6.362.620 baris** transaksi dan **11 kolom** fitur[cite: 1, 3].
-* **Temuan Utama (Key Insights):**
-  * **Class Imbalance:** Terdapat ketidakseimbangan kelas yang ekstrem. Transaksi normal (`0`) berjumlah ~6,35 juta, sedangkan transaksi penipuan (`1`) hanya berjumlah 8.213 baris[cite: 3]. Tingkat rasio penipuan keseluruhan (*fraud rate*) sangat kecil, yaitu **0.13%**[cite: 3].
-  * **Transaction Types:** Berdasarkan analisis, jenis transaksi yang paling sering muncul adalah `CASH_OUT` dan `PAYMENT`[cite: 1, 3]. Namun, risiko penipuan tertinggi mutlak terkonsentrasi pada tipe **`TRANSFER` (~0.77%)** dan **`CASH_OUT` (~0.18%)**[cite: 1, 5].
+* **Dataset Source:** Public financial transaction dataset from Kaggle (`amanalisiddiqui/fraud-detection-dataset`)[cite: 1].
+* **Data Scale:** Consists of **6,362,620 rows** of transactions and **11 feature columns**[cite: 1, 3].
+* **Key Insights:**
+  * **Class Imbalance:** Extreme class imbalance is observed. Normal transactions (`0`) account for ~6.35 million, while fraudulent transactions (`1`) total only 8,213 rows[cite: 3]. The overall fraud rate is extremely low at **0.13%**[cite: 3].
+  * **Transaction Types:** Based on analysis, the most frequent transaction types are `CASH_OUT` and `PAYMENT`[cite: 1, 3]. However, the highest fraud risk is strictly concentrated in **`TRANSFER` (~0.77%)** and **`CASH_OUT` (~0.18%)**[cite: 1, 5].
 
 ---
 
 ## ⚙️ 2. Feature Engineering & Preprocessing
-* **Derived Features:** Menambahkan fitur selisih perubahan saldo sebelum dan sesudah transaksi untuk akun pengirim (`balanceDiffOrig`) dan akun penerima (`balanceDiffDest`) guna mendeteksi anomali pengurasan saldo[cite: 6, 7].
-* **Data Transformation:** Menerapkan transformasi logaritmik (`np.log1p`) untuk meredam kemiringan ekstrem (*skewness*) pada nominal transaksi, serta normalisasi fitur menggunakan `StandardScaler` dan `OneHotEncoder`[cite: 6, 11, 12].
-* **Pipeline Integration:** Menggabungkan seluruh tahapan prapemrosesan ke dalam *Scikit-Learn Pipeline* agar pemrosesan data menjadi konsisten[cite: 12].
+* **Derived Features:** Created balance difference features before and after transactions for both senders (`balanceDiffOrig`) and receivers (`balanceDiffDest`) to detect balance-draining anomalies[cite: 6, 7].
+* **Data Transformation:** Applied logarithmic transformation (`np.log1p`) to mitigate extreme skewness in transaction amounts, alongside feature scaling using `StandardScaler` and `OneHotEncoder`[cite: 6, 11, 12].
+* **Pipeline Integration:** Combined all preprocessing steps into a Scikit-Learn Pipeline to ensure consistent data processing[cite: 12].
 
 ---
 
 ## 🤖 3. Machine Learning Modeling
-* **Algorithm:** *Logistic Regression* dengan parameter `class_weight='balanced'` untuk memberikan bobot khusus pada kelas minoritas (fraud)[cite: 12].
-* **Train-Test Split:** Membagi data dengan rasio **70:30** serta menerapkan parameter `stratify=y` agar proporsi kelas fraud tetap terjaga[cite: 11].
+* **Algorithm:** Logistic Regression with the `class_weight='balanced'` parameter to assign specialized weights to the minority class (fraud)[cite: 12].
+* **Train-Test Split:** Split the data with a **70:30** ratio utilizing the `stratify=y` parameter to maintain proportional representation of the fraud class[cite: 11].
 * **Model Evaluation Metrics:**
-  * **Akurasi Keseluruhan:** Mencapai **94.77%** pada data uji[cite: 12].
-  * **Recall (Fraud Class):** Mencapai **94%**, memastikan bahwa sistem mampu mendeteksi sebagian besar kasus penipuan dan meminimalisir lolosnya pelaku kejahatan[cite: 12].
-* **Model Persistence:** Model yang telah dilatih diekspor menggunakan pustaka `joblib` dengan nama file `fraud_detection_pipeline.pkl`[cite: 12].
+  * **Overall Accuracy:** Reached **94.77%** on the test set[cite: 12].
+  * **Recall (Fraud Class):** Reached **94%**, ensuring that the system successfully captures the vast majority of fraudulent cases and minimizes escaped perpetrators[cite: 12].
+* **Model Persistence:** The trained model pipeline was exported using the `joblib` library and saved as `fraud_detection_pipeline.pkl`[cite: 12].
 
 ---
 
 ## 💻 4. Application Deployment & Preview
-Model machine learning telah diintegrasikan ke dalam antarmuka aplikasi web interaktif (*Fraud Detection App*) di mana pengguna dapat menguji parameter transaksi secara langsung:
-* **Normal Transaction:** Mengembalikan status *“No Fraud Detected”* (Prediksi 0)[cite: 15].
-* **Suspicious/Fraud Transaction:** Mengembalikan peringatan *“Fraud Detected!”* (Prediksi 1)[cite: 14].
+The machine learning model has been integrated into an interactive web application interface (Fraud Detection App) where users can dynamically test transaction parameters:
+* **Normal Transaction:** Returns the status *“No Fraud Detected”* (Prediction 0)[cite: 15].
+* **Suspicious/Fraud Transaction:** Returns a warning alert *“Fraud Detected!”* (Prediction 1)[cite: 14].
 
 ---
 
